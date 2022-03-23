@@ -6,7 +6,7 @@
 /*   By: gjacinta <gjacinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 19:30:17 by gjacinta          #+#    #+#             */
-/*   Updated: 2022/03/21 18:21:54 by gjacinta         ###   ########.fr       */
+/*   Updated: 2022/03/23 14:56:25 by gjacinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	check_arguments(t_data	*data)
 {
 	if (data->num_phil <= 0 || data->time_to_die <= 0
-		|| data->time_to_sleep <= 0 || data->time_to_eat <=0)
+		|| data->time_to_sleep <= 0 || data->time_to_eat <= 0)
 		return (1);
 	return (0);
 }
@@ -36,9 +36,10 @@ void	init_phil(t_data	*data, int i)
 int	init_fork(t_data *data)
 {
 	int	i;
+
 	i = 0;
 	data->philo = malloc(sizeof(t_philo) * data->num_phil);
-	if (!data->philo);
+	if (!data->philo)
 		return (1);
 	data->fork = malloc(sizeof(pthread_mutex_t) * data->num_phil);
 	if (!data->fork)
@@ -55,7 +56,7 @@ int	init_fork(t_data *data)
 	return (0);
 }
 
-int	read_arguments(char **argv, t_data	*data, int	argc)
+int	read_arguments(char **argv, t_data *data, int argc)
 {
 	if (argc != 5 && argc != 6)
 		return (1);
