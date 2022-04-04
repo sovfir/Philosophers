@@ -6,7 +6,7 @@
 /*   By: gjacinta <gjacinta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 18:51:11 by gjacinta          #+#    #+#             */
-/*   Updated: 2022/03/23 14:56:35 by gjacinta         ###   ########.fr       */
+/*   Updated: 2022/04/04 18:28:06 by gjacinta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ void	ft_life(t_philo *philo)
 		&& philo->eating != philo->dinner->times_had_dinner)
 	{
 		pthread_mutex_lock(&philo->dinner->fork[philo->right_fork]);
-		printf("%lu %d took a fork\n", get_time()
+		printf("%lu %d has taken a fork\n", get_time()
 			- philo->dinner->start_time, philo->id);
 		pthread_mutex_lock(&philo->dinner->fork[philo->left_fork]);
-		printf("%lu %d took a fork\n", get_time()
+		printf("%lu %d has taken a fork\n", get_time()
 			- philo->dinner->start_time, philo->id);
 		printf("%lu %d is eating\n", get_time()
 			- philo->dinner->start_time, philo->id);
-		ft_usleep(philo->dinner->time_to_eat);
 		philo->time_last_eating = get_time();
-		pthread_mutex_unlock(&philo->dinner->fork[philo->right_fork]);
-		pthread_mutex_unlock(&philo->dinner->fork[philo->left_fork]);
+		ft_usleep(philo->dinner->time_to_eat);
 		if (philo->eating != philo->dinner->times_had_dinner)
 		{
 			printf("%lu %d is sleeping\n", get_time()
 				- philo->dinner->start_time, philo->id);
+			pthread_mutex_unlock(&philo->dinner->fork[philo->right_fork]);
+			pthread_mutex_unlock(&philo->dinner->fork[philo->left_fork]);
 			ft_usleep(philo->dinner->time_to_sleep);
 			printf("%lu %d is thinking\n", get_time()
 				- philo->dinner->start_time, philo->id);
@@ -95,7 +95,7 @@ int	death_check(t_data *data)
 				> (unsigned long)data->time_to_die)
 			{
 				data->dead = 1;
-				printf(RED "%lu %d died!!!\n",
+				printf(RED "%lu %d died\n",
 					now_time - data->start_time, i + 1);
 				return (1);
 			}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arguments.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gjacinta <gjacinta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ejafer <ejafer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 19:30:17 by gjacinta          #+#    #+#             */
-/*   Updated: 2022/03/23 14:56:25 by gjacinta         ###   ########.fr       */
+/*   Updated: 2022/04/04 17:43:11 by ejafer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ void	init_phil(t_data	*data, int i)
 {
 	data->philo[i].id = i + 1;
 	data->philo[i].right_fork = i;
+	data->philo[i].left_fork = i + 1;
 	data->philo[i].dinner = data;
 	data->philo[i].eating = 0;
-	if (i == 0)
-		data->philo[i].left_fork = data->num_phil - 1;
-	else
-		data->philo[i].left_fork = data->num_phil -1;
+	if (data->philo[i].left_fork == data->num_phil)
+		data->philo[i].left_fork = 0;
 	data->philo[i].time_last_eating = get_time();
 }
 

@@ -1,4 +1,4 @@
-NAME = phil
+NAME = philo
 
 SRC = main.c\
 	atoi.c\
@@ -16,7 +16,7 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJ) $(HDRS)
-			$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+			$(CC) $(CFLAGS) -pthread $(OBJ) -o $(NAME)
 
 clean:
 		rm -f $(OBJ)
